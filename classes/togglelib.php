@@ -292,5 +292,37 @@ class togglelib {
         }
         return $param;
     }
+
+    /**
+     * Called on page load to get the cached preference to initialise the page with
+     * Any subsequent changes are cached and updated in DB on either logout or page reload
+     *
+     * If the session cache has no value (no cache) - the cache is filled from the database
+     * else it will save the preference that is in the session cache to the database
+     *
+     * @param string $name name of the preference
+     * @return mixed|null the preference from the cache
+     */
+    public static function get_cached_preference($name) {
+        global $SESSION;
+
+        // Create object to store prefs if doesn't exist.
+        if (empty($SESSION->topcollpreferences)) {
+            $SESSION->topcollpreferences = new \stdClass();
+        }
+
+        // Is this preference already cached?
+        if (empty($SESSION->topcollpreferences->$name)) {
+            // No session cache, so load from DB into session.
+            $SESSION->topcollpreferences->$name = get_user_preferences($name);;
+        } else {
+            // Session already exists, so update the DB.
+            if (!set_user_preference($name, $SESSION->topcollpreferences->$name)) {
+                print_error('errorsettinguserpref');
+            };
+        }
+
+        return $SESSION->topcollpreferences->$name;
+    }
 }
 

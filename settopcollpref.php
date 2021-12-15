@@ -45,9 +45,9 @@ if (!isset($USER->ajax_updatable_user_prefs[$name])) {
 $value = \format_topcoll\togglelib::required_topcoll_param('value');
 // Update.
 if ($value) {
-    if (!set_user_preference($name, $value)) {
-        print_error('errorsettinguserpref');
-    }
+    // Update in a local cache, to avoid unnecessarily calling the database
+    $SESSION->topcollpreferences->$name = $value;
+
     echo 'OK';
 } else {
     header('HTTP/1.1 406 Not Acceptable');
