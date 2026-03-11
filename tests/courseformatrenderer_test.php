@@ -288,8 +288,7 @@ final class courseformatrenderer_test extends \advanced_testcase {
             'columnclass' => 'col-sm-12',
             'contentaria' => true,
             'cscml' => self::call_method($this->outputus, 'course_section_cmlist', [$section1]) .
-                self::call_method($this->outputus, 'course_section_add_cm_control', [$this->course, $section1->section,
-                    $sectionreturn, ]),
+                self::call_method($this->outputus, 'section_add_cm_controls', [$this->courseformat, $section1, ]),
             'leftcontent' => self::call_method($this->outputus, 'section_left_content', [$section1, $this->course,
                 $onsectionpage, ]),
             'heading' => '<h3 data-for="section_title" data-id="' . $section1->id . '" data-number="1" id="sectionid-' . $section1->id .

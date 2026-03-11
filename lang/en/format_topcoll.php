@@ -423,6 +423,9 @@ $string['defaultdisplayblocksloc_desc'] = "Choose the location for the blocks ch
 $string['sidepost'] = 'Post';
 $string['sidepre'] = 'Pre';
 
+// Section add maximum message (replaces deprecated core string).
+$string['maxsectionsmessage'] = 'You have reached the maximum number of sections allowed.';
+
 // Information.
 $string['information'] = 'Information';
 $string['informationsettings'] = 'Information settings';
